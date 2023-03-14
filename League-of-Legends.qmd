@@ -37,7 +37,9 @@ Let's take a look data from [Oracle's Elixir](https://oracleselixir.com/) to see
 I will fit a linear regression model between First Blood % (FB%) and Average Combined Kills per Minute (CPKM) and see if there is an association.
 
 ```{r}
-teams <- read_csv(here::here("Personal Project/LCK 2023 Spring - Team Stats - OraclesElixir.csv"))
+#| message: false
+#| results: false
+teams <- read_csv("https://raw.githubusercontent.com/rjimenezdata/LCKModeling/main/LCK%202023%20Spring%20-%20Team%20Stats%20-%20OraclesElixir.csv")
 
 confidence <- teams |>
   mutate(`FB%` = str_remove_all(`FB%`,
@@ -71,6 +73,8 @@ But is there something else early aggression can tell us? Let's look at FB% agai
 ## First Blood Percentage: Snowball Effectiveness?
 
 ```{r}
+#| message: false
+#| results: false
 snowball <- teams |>
   mutate(`FB%` = str_remove_all(`FB%`,
                                  "%"),
