@@ -1,0 +1,116 @@
+---
+title: "League of Legends: LCK 2023 Spring Split Trend Analysis"
+format: 
+  html:
+    self-contained: true
+    code-tools: true
+    toc: true
+    number-sections: true
+    code-fold: true
+editor: source
+execute: 
+  error: true
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| label: setup
+library(tidyverse)
+library(here)
+library(broom)
+```
+
+## Intro
+
+Being interested in
+
+
+## Confidence: a key predictor in a team's performance?
+
+
+The main objective of destroying the enemy's nexus generally gets easier when the enemy spends more time dead. This is because the more time they spend dead, the less time they will have to exert map pressure. I want to know if LCK teams who are aggressive early are more likely to be aggressive throughout the game.
+
+
+Let's take a look data from [Oracle's Elixir](https://oracleselixir.com/) to see what we can find.
+I will fit a linear regression model between First Blood % (FB%) and Average Combined Kills per Minute (CPKM) and see if there is an association.
+
+```{r}
+teams <- read_csv(here::here("Personal Project/LCK 2023 Spring - Team Stats - OraclesElixir.csv"))
+
+confidence <- teams |>
+  mutate(`FB%` = str_remove_all(`FB%`,
+                                 "%"),
+         `FB%` = as.numeric(`FB%`))|>
+  select(Team, `FB%`, CKPM) |>
+  head()
+  
+  
+
+confidence |>
+  ggplot(aes(x=`FB%`,
+             y=CKPM)) +
+  geom_point(color = "darkred") +
+  geom_smooth(method = "lm",
+              color = "red")
+
+lm(CKPM ~ `FB%`,
+   data = confidence) |>
+  tidy()
+```
+
+We can see from the linear model output that the regression coefficient is about -0.0002, indicating that for every 1% increase in first blood frequency, a team's mean combined kills per minute decrease by about .0002 kills. But based on the p-value = ~0.91 obtained for said statistic, we do not have strong enough evidence to reject the Null hypothesis of no linear association, meaning there isn't significant evidence that this model is accurate.
+
+So it appears as though there is almost no linear association between how often a team gets first blood and the mean combined number of kills per minute the team has in a game. I conclude that a team's average level of aggression in the early game is not at all an indicator of how aggressive they will be throughout the entire game.
+
+
+But is there something else early aggression can tell us? Let's look at FB% against mean gold lead @ 15 minutes (GD15).
+
+
+## First Blood Percentage: Snowball Effectiveness?
+
+```{r}
+snowball <- teams |>
+  mutate(`FB%` = str_remove_all(`FB%`,
+                                 "%"),
+         `FB%` = as.numeric(`FB%`))|>
+  select(Team, `FB%`, GD15) |>
+  head()
+
+snowball |>
+  ggplot(aes(x=`FB%`,
+             y=GD15)) +
+  geom_point(color = "steelblue") +
+  geom_smooth(method = "lm",
+              color = "darkred") +
+  labs(title = "15-Minute Gold Difference by First Blood % Regression",
+       x = "First Blood %",
+       y = NULL,
+       subtitle = "Mean Gold Lead @ 15-Min") +
+  theme_minimal()
+
+lm(GD15 ~ `FB%`,
+   data = snowball) |>
+  tidy()
+```
+
+From my regression coefficient = ~79.57, it would appear there is a positive linear association between how often a team gets first blood and how large their gold lead @ 15 minutes might be. Here's a model I fit expanding on this information:
+
+$$
+\widehat{GD15} = 79.57(FB\%) - 3991.145
+$$
+
+So, based on my model, if a team has 0 first bloods across the entire split, they will be down about 3991 gold @ 15 minutes on average. For every 1 point increase in first blood %, average gold lead @ 15 minutes increases by about 79.57 gold. The p-value for the regression model coefficient = .004, indicating strong statistical significance in this association.
+
+
+## What does it mean?
+
+While first blood % does not tell us anything about how many kills a team acquires in a game on average, first blood % does tell us how a team acts at 15 minutes. It appears as though a "snowball" pattern emerges, where a team stretches a small lead in a game to largely increase their chance at winning it. As the 15-minute mark is about mid-game in LCK matches, the "snowball" effect seems to reflect teams' efficiency in taking a small lead and widening it to win much easier.
+
+While the sample size is small and therefore not the most accurate representation of the larger population of teams in every competitive League of Legends league, this model is mostly accurate to patterns that emerge annually and are widely recognized in the LCK.
+
+
+```{r}
+#Import all LCK bot laners data, analyze cs diff @ 15-min vs first dragon %
+```
