@@ -26,7 +26,7 @@ library(gitcreds)
 
 ## Intro
 
-Being interested in
+Being both a statistician and a hobbyist League of Legends player, I decided to try predictive modeling for the win frequency of teams in the League of Legends Champions Korea (LCK) league, the league with the highest skill expression among players and greatest degree of creativity and intelligence in coaches.
 
 
 ## Confidence: a key predictor in a team's performance?
@@ -87,9 +87,9 @@ snowball <- teams |>
 snowball |>
   ggplot(aes(x=`FB%`,
              y=GD15)) +
-  geom_point(color = "steelblue") +
+  geom_point(color = "darkred") +
   geom_smooth(method = "lm",
-              color = "darkred") +
+              color = "gold") +
   labs(title = "15-Minute Gold Difference by First Blood % Regression",
        x = "First Blood %",
        y = NULL,
