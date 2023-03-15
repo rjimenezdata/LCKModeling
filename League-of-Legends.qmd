@@ -20,8 +20,6 @@ execute:
 library(tidyverse)
 library(here)
 library(broom)
-library(usethis)
-library(gitcreds)
 ```
 
 ## Intro
