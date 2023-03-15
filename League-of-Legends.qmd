@@ -7,6 +7,7 @@ format:
     toc: true
     number-sections: true
     code-fold: true
+    mainfont: "Times New Roman"
 editor: source
 execute: 
   error: true
@@ -17,8 +18,11 @@ execute:
 
 ```{r setup}
 #| label: setup
+#| include: false
 library(tidyverse)
 library(broom)
+library(kableExtra)
+teams <- read_csv("https://raw.githubusercontent.com/rjimenezdata/LCKModeling/main/LCK%202023%20Spring%20-%20Team%20Stats%20-%20OraclesElixir.csv")
 ```
 
 ## Intro
@@ -26,7 +30,7 @@ library(broom)
 Being both a statistician and a hobbyist League of Legends player, I decided to try predictive modeling for the win frequency of teams in the League of Legends Champions Korea (LCK) league, the league with the highest skill expression among players and greatest degree of creativity and intelligence in coaches.
 
 
-## Confidence: a key predictor in a team's performance?
+## Confidence: Do Aggressive Teams Win More?
 
 
 The main objective of destroying the enemy's nexus generally gets easier when the enemy spends more time dead. This is because the more time they spend dead, the less time they will have to exert map pressure. I want to know if LCK teams who are aggressive early are more likely to be aggressive throughout the game.
@@ -36,8 +40,6 @@ Let's take a look data from [Oracle's Elixir](https://oracleselixir.com/) to see
 I will fit a linear regression model between First Blood % (FB%) and Average Combined Kills per Minute (CPKM) and see if there is an association.
 
 ```{r}
-teams <- read_csv("https://raw.githubusercontent.com/rjimenezdata/LCKModeling/main/LCK%202023%20Spring%20-%20Team%20Stats%20-%20OraclesElixir.csv")
-
 confidence <- teams |>
   mutate(`FB%` = str_remove_all(`FB%`,
                                  "%"),
@@ -57,9 +59,16 @@ confidence |>
 lm(CKPM ~ `FB%`,
    data = confidence) |>
   tidy() |>
-  mutate(across(.cols = estimate:p.value,
-                .fns = ~round(.x, 
-                              digits = 4)))
+  kbl(col.names = c("Term",
+                    "Estimate",
+                    "Standard Error",
+                    "Statistic",
+                    "P-value"),
+      digits = 4,
+      caption = "Regression Output") |>
+  kable_classic_2(full_width = T,
+                  html_font = "Times New Roman",
+                  lightable_options = "striped")
 ```
 
 We can see from the linear model output that the regression coefficient is about -0.0002, indicating that for every 1% increase in first blood frequency, a team's mean combined kills per minute decrease by about .0002 kills. But based on the p-value = ~0.91 obtained for said statistic, we do not have strong enough evidence to reject the Null hypothesis of no linear association, meaning there isn't significant evidence that this model is accurate.
@@ -70,7 +79,7 @@ So it appears as though there is almost no linear association between how often 
 But is there something else early aggression can tell us? Let's look at FB% against mean gold lead @ 15 minutes (GD15).
 
 
-## First Blood Percentage: Snowball Effectiveness?
+## First Blood Percentage: Snowball Effect?
 
 ```{r}
 #| message: false
@@ -96,9 +105,16 @@ snowball |>
 lm(GD15 ~ `FB%`,
    data = snowball) |>
   tidy() |>
-  mutate(across(.cols = estimate:p.value,
-                .fns = ~round(.x, 
-                              digits = 4)))
+  kbl(col.names = c("Term",
+                    "Estimate",
+                    "Standard Error",
+                    "Statistic",
+                    "P-value"),
+      digits = 4,
+      caption = "Regression Output") |>
+  kable_classic_2(full_width = T,
+                  html_font = "Times New Roman",
+                  lightable_options = "striped")
 ```
 
 From my regression coefficient = ~79.57, it would appear there is a positive linear association between how often a team gets first blood and how large their gold lead @ 15 minutes might be. Here's a model I fit expanding on this information:
