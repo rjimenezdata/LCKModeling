@@ -10,8 +10,8 @@ tidyverse [ggplot2, dplyr, readr, stringr] (https://cran.r-project.org/web/packa
 
 broom (https://cran.r-project.org/web/packages/broom/index.html), 
 
-here (https://cran.r-project.org/web/packages/here/index.html), 
+here (https://cran.r-project.org/web/packages/here/index.html).
 
-usethis (https://cran.r-project.org/web/packages/gitcreds/index.html), 
+I also used usethis (https://cran.r-project.org/web/packages/gitcreds/index.html), 
 
-gitcreds (https://cran.r-project.org/web/packages/usethis/index.html)
+along with gitcreds (https://cran.r-project.org/web/packages/usethis/index.html) to streamline workflow between multiple machines.
