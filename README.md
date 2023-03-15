@@ -19,4 +19,3 @@ here (https://cran.r-project.org/web/packages/here/index.html).
 I also use usethis (https://cran.r-project.org/web/packages/gitcreds/index.html)
 \
 and gitcreds (https://cran.r-project.org/web/packages/usethis/index.html) to streamline workflow between multiple machines.
-\
