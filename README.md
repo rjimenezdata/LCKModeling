@@ -1,5 +1,7 @@
 # LCKModeling
-Small personal project fitting models to investigate the best predictor for win frequency in the League of Legends LCK
+Small personal project fitting models to investigate the best predictor for win frequency in the League of Legends LCK. 
+
+All credit goes to Oracle's Elixir (https://oracleselixir.com/stats/teams/byTournament/LCK%2F2023%20Season%2FSpring%20Season) as I use their data.
 \
 \
 Required R dependencies: 
