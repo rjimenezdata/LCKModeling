@@ -6,7 +6,7 @@ All credit goes to Oracle's Elixir (https://oracleselixir.com) as I use their da
 \
 **Required R dependencies**: 
 \
-tidyverse [ggplot2, dplyr, readr, stringr] (https://cran.r-project.org/web/packages/tidyverse/index.html), 
+tidyverse [ggplot2, dplyr, knitr, readr, stringr] (https://cran.r-project.org/web/packages/tidyverse/index.html), 
 \
 broom (https://cran.r-project.org/web/packages/broom/index.html), 
 \
