@@ -54,7 +54,12 @@ confidence |>
              y=CKPM)) +
   geom_point(color = "darkred") +
   geom_smooth(method = "lm",
-              color = "red")
+              color = "red") +
+  labs(title = "Average Combined Kills Per Minute by First Blood % Regression",
+       x = "First Blood %",
+       y = NULL,
+       subtitle = "Combined Kills Per Minute") +
+  theme_minimal(base_family = "Times New Roman")
 
 lm(CKPM ~ `FB%`,
    data = confidence) |>
@@ -100,7 +105,7 @@ snowball |>
        x = "First Blood %",
        y = NULL,
        subtitle = "Mean Gold Lead @ 15-Min") +
-  theme_minimal()
+  theme_minimal(base_family = "Times New Roman")
 
 lm(GD15 ~ `FB%`,
    data = snowball) |>
