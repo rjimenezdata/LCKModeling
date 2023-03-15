@@ -10,7 +10,9 @@ tidyverse [ggplot2, dplyr, readr, stringr] (https://cran.r-project.org/web/packa
 \
 broom (https://cran.r-project.org/web/packages/broom/index.html), 
 \
-here (https://cran.r-project.org/web/packages/here/index.html).
+here (https://cran.r-project.org/web/packages/here/index.html),
+\
+and kableExtra (https://cran.r-project.org/web/packages/kableExtra/index.html).
 \
 \
 \
