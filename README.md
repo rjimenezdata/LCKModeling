@@ -3,23 +3,23 @@ Small personal project fitting models to investigate the best predictor for win 
 \
 Read ["League of Legends: LCK 2023 Spring Split Trend Analysis" here](https://rjimenezdata.github.io/LCKModeling/League-of-Legends.html)
 \
-All credit goes to Oracle's Elixir (https://oracleselixir.com) as I use their data.
+All credit goes to [Oracle's Elixir](https://oracleselixir.com) as I use their data.
 \
 \
 **Required R dependencies**: 
 \
-tidyverse [ggplot2, dplyr, knitr, readr, stringr] (https://cran.r-project.org/web/packages/tidyverse/index.html), 
+[**tidyverse**: ggplot2, dplyr, knitr, readr, stringr](https://cran.r-project.org/web/packages/tidyverse/index.html), 
 \
-broom (https://cran.r-project.org/web/packages/broom/index.html), 
+[**broom**](https://cran.r-project.org/web/packages/broom/index.html), 
 \
-here (https://cran.r-project.org/web/packages/here/index.html),
+[**here**](https://cran.r-project.org/web/packages/here/index.html),
 \
-and kableExtra (https://cran.r-project.org/web/packages/kableExtra/index.html).
+and [**kableExtra**](https://cran.r-project.org/web/packages/kableExtra/index.html).
 \
 \
 \
-**Note**:
+<ins>**Note**</ins>:
 \
-I also use usethis (https://cran.r-project.org/web/packages/gitcreds/index.html)
+I also use [usethis](https://cran.r-project.org/web/packages/gitcreds/index.html)
 \
-and gitcreds (https://cran.r-project.org/web/packages/usethis/index.html) to streamline workflow between multiple machines.
+and [gitcreds](https://cran.r-project.org/web/packages/usethis/index.html) to streamline workflow between multiple machines.
