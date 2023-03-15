@@ -18,7 +18,6 @@ execute:
 ```{r setup}
 #| label: setup
 library(tidyverse)
-library(here)
 library(broom)
 ```
 
@@ -37,8 +36,6 @@ Let's take a look data from [Oracle's Elixir](https://oracleselixir.com/) to see
 I will fit a linear regression model between First Blood % (FB%) and Average Combined Kills per Minute (CPKM) and see if there is an association.
 
 ```{r}
-#| message: false
-#| results: false
 teams <- read_csv("https://raw.githubusercontent.com/rjimenezdata/LCKModeling/main/LCK%202023%20Spring%20-%20Team%20Stats%20-%20OraclesElixir.csv")
 
 confidence <- teams |>
@@ -59,7 +56,10 @@ confidence |>
 
 lm(CKPM ~ `FB%`,
    data = confidence) |>
-  tidy()
+  tidy() |>
+  mutate(across(.cols = estimate:p.value,
+                .fns = ~round(.x, 
+                              digits = 4)))
 ```
 
 We can see from the linear model output that the regression coefficient is about -0.0002, indicating that for every 1% increase in first blood frequency, a team's mean combined kills per minute decrease by about .0002 kills. But based on the p-value = ~0.91 obtained for said statistic, we do not have strong enough evidence to reject the Null hypothesis of no linear association, meaning there isn't significant evidence that this model is accurate.
@@ -74,7 +74,6 @@ But is there something else early aggression can tell us? Let's look at FB% agai
 
 ```{r}
 #| message: false
-#| results: false
 snowball <- teams |>
   mutate(`FB%` = str_remove_all(`FB%`,
                                  "%"),
@@ -96,7 +95,10 @@ snowball |>
 
 lm(GD15 ~ `FB%`,
    data = snowball) |>
-  tidy()
+  tidy() |>
+  mutate(across(.cols = estimate:p.value,
+                .fns = ~round(.x, 
+                              digits = 4)))
 ```
 
 From my regression coefficient = ~79.57, it would appear there is a positive linear association between how often a team gets first blood and how large their gold lead @ 15 minutes might be. Here's a model I fit expanding on this information:
