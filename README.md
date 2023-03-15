@@ -1,7 +1,7 @@
 # LCKModeling
 Small personal project fitting models to investigate the best predictor for win frequency in the League of Legends LCK. 
 \
-Read **here:** https://rjimenezdata.github.io/LCKModeling/League-of-Legends.html 
+Read [**here:**](https://rjimenezdata.github.io/LCKModeling/League-of-Legends.html)
 \
 All credit goes to Oracle's Elixir (https://oracleselixir.com) as I use their data.
 \
