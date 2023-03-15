@@ -4,7 +4,7 @@ Small personal project fitting models to investigate the best predictor for win 
 All credit goes to Oracle's Elixir (https://oracleselixir.com) as I use their data.
 \
 \
-Required R dependencies: 
+**Required R dependencies**: 
 \
 tidyverse [ggplot2, dplyr, readr, stringr] (https://cran.r-project.org/web/packages/tidyverse/index.html), 
 \
